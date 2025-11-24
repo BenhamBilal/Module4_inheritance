@@ -1,10 +1,11 @@
+package Vormen;
+
 import java.awt.*;
+import java.util.Objects;
 
-public class Vorm {
+public abstract class Vorm {
 
-    private int x;
-    private int y;
-    private int lijndikte;
+    private int x,y, lijndikte;
     private Color kleur;
 
     public Vorm(){
@@ -49,4 +50,24 @@ public class Vorm {
     public void setKleur(Color kleur) {
         this.kleur = kleur;
     }
+
+    public String toString() {
+        return "De kleur van de vorm is" + this.kleur;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Vorm vorm = (Vorm) o;
+        return getX() == vorm.getX() && getY() == vorm.getY() && getLijndikte() == vorm.getLijndikte() && Objects.equals(getKleur(), vorm.getKleur());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY(), getLijndikte(), getKleur());
+    }
+
+    public abstract float berekenOppervlakte();
+
+
 }
